@@ -1,0 +1,13 @@
+Pseudo-Universal Turing Machine
+-------------------------------
+
+This project was done for a class, and it emulates a very basic turing machine, using a very simple programming language.
+
+The interpreter continually iterates through the instructions, which are either entered manually or read from a file (.tur files).
+
+It stops when either the stack pointer has reached the end of the input data, or it has recieved the "STOP" instruction.
+
+I have no idea if this really qualifies as a turing machine in any way, but hey, my project, my rules.
+
+
+
