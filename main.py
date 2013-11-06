@@ -101,6 +101,7 @@ def main(instructs,data):
         dp = sp*3 - 1
         if sp == len(data) + 1:
             break
+        os.system('cls')
         os.system('clear')
         print("Prog Counter: ",pc)
         print("Instruct: ",instruct)
