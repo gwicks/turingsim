@@ -21,6 +21,12 @@ def encodeMachine(structs,data,outfile):
             output.write("00000100")
         elif struct == "FLIP":
             output.write("00000101")
+        elif struct == "IF 0 THEN PRINT 1":
+            output.write("00000110")
+        elif struct == "IF 1 THEN PRINT 0":
+            output.write("00000111")
+        elif struct == "POP":
+            output.write("00001000")
     
     output.write("|")
 
@@ -29,7 +35,7 @@ def encodeMachine(structs,data,outfile):
     output.close()
 
 def decodeStructs(infile):
-    instructDict = {"00000000":"STOP","00000001":"PRINT 0","00000010":"PRINT 1","00000011":"RIGHT","00000100":"LEFT","00000101":"FLIP"}
+    instructDict = {"00000000":"STOP","00000001":"PRINT 0","00000010":"PRINT 1","00000011":"RIGHT","00000100":"LEFT","00000101":"FLIP","00000110":"IF 0 THEN PRINT 1","00000111":"IF 1 THEN PRINT 0","00001000":"POP"}
     readfile = open(infile,"r")
     line = readfile.readline()
     line = line.split("|")
@@ -90,6 +96,9 @@ def main(instructs,data):
                     data[sp-1] = 1
                 else:
                     data[sp-1] = 0
+        elif instruct == "POP":
+            pc += 1
+            data.pop(sp-1)
         elif "IF" in instruct:
             targetval = int(instruct[3])
             printval = int(instruct[16])
@@ -112,7 +121,7 @@ def main(instructs,data):
         sleep(1)
 
 def progShell():
-    validInstructs = ["STOP","PRINT 0","PRINT 1","FLIP","IF 0 THEN PRINT 1","IF 1 THEN PRINT 0","RIGHT","LEFT"]
+    validInstructs = ["STOP","PRINT 0","PRINT 1","FLIP","IF 0 THEN PRINT 1","IF 1 THEN PRINT 0","RIGHT","LEFT","POP"]
     print("Turing Post Language Shell")
     print("Type FINISH when done editing program")
     newInst = ""
